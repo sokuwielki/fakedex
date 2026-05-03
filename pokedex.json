@@ -22,6 +22,7 @@
     "types": ["Fire"],
     "description": "TA PANDA TO NINJA.",
     "image": "fakemons/Flambit.png",
+    "evo_line": [],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
   }
