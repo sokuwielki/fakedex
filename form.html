@@ -135,23 +135,50 @@
 </div>
 
 <script>
-    function updatePreview() {
-        const slug = document.getElementById('slug').value || "id_null";
+    document.addEventListener('DOMContentLoaded', () => {
+    // This ensures the preview looks clean on first load
+            updatePreview(); 
+        });
         
+    function updateImagePath() {
+        const nameValue = document.getElementById('name').value;
+        const imgInput = document.getElementById('img');
+        
+        if (!nameValue) {
+            imgInput.placeholder = "fakemons/name.webp";
+            return;
+        }
+    
+        const cleanName = nameValue.toLowerCase().replace(/\s+/g, '-');
+        imgInput.placeholder = `fakemons/${cleanName}.webp`;
+    }
+    
+    function updatePreview() {
+        // 1. Get the "Clean" name for the automatic image path
+        const nameInput = document.getElementById('name').value;
+        const cleanName = nameInput.toLowerCase().replace(/\s+/g, '-');
+        
+        // 2. Get the manual image input
+        const imgValue = document.getElementById('img').value;
+    
+        // 3. Build the Data Object
         const data = {
-            name: document.getElementById('name').value || "Unknown Species",
+            name: nameInput || "Unknown Species",
             types: document.getElementById('types').value.split(',').map(s => s.trim()).filter(s => s !== ""),
             description: document.getElementById('desc').value || "No data.",
-            image: document.getElementById('img').value.toLowerCase() || "fakemons/placeholder.webp",
+            // SMART LOGIC: Use manual path if typed, otherwise use the clean name
+            image: imgValue ? imgValue.toLowerCase() : `fakemons/${cleanName || 'placeholder'}.webp`,
             evo_line: document.getElementById('evo').value.split(',').map(s => s.trim()).filter(s => s !== ""),
             stats: document.getElementById('stats').value.split(',').map(s => parseInt(s.trim()) || 0),
             moves: document.getElementById('moves').value.split(',').map(s => s.trim()).filter(s => s !== "")
         };
-
+    
+        // 4. Output to screen
+        const slug = document.getElementById('slug').value || cleanName || "id_null";
         const outputString = `"${slug}": ${JSON.stringify(data, null, 4)},`;
         document.getElementById('json-output').innerText = outputString;
     }
-
+    
     function copyToClipboard() {
         const text = document.getElementById('json-output').innerText;
         navigator.clipboard.writeText(text).then(() => {
@@ -163,18 +190,7 @@
                 status.style.color = "#fff";
             }, 2000);
         });
-    }
-function updatePreview {
-    const nameValue = document.getElementById('name').value.toLowerCase().replace(/\s+/g, '-');
-    const imgValue = document.getElementById('img').value;
-    
-    const data = {
-        name: document.getElementById('name').value || "Unknown Species",
-        // IF the user typed an image path, use it. 
-        // IF NOT, use the auto-generated one based on the name.
-        image: imgValue ? imgValue.toLowerCase() : `fakemons/${nameValue || 'placeholder'}.webp`,
-    }
-};
+        }
 </script>
 
 </body>
