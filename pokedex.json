@@ -43,5 +43,32 @@
     "evo_line": ["flambit","mufflhare","jugglhare"],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  },
+  "leeve": {
+    "name": "Leeve",
+    "types": ["Grass"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Leeve.png",
+    "evo_line": ["leeve","muroom","shamurell"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  },
+  "muroom": {
+    "name": "Muroom",
+    "types": ["Grass", "Psychic"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Muroom.png",
+    "evo_line": ["leeve","muroom","shamurell"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  },
+  "shamurell": {
+    "name": "Shamurell",
+    "types": ["Grass", "Psychic"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Shamurell.png",
+    "evo_line": ["leeve","muroom","shamurell"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
   }
 }
