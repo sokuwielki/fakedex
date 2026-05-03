@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Dex Terminal</title>
+    <style>
+        :root {
+            --bg-black: #0a0a0a;
+            --neon-green: #39ff14;
+            --dark-green: #052e05;
+            --sharp-edge: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0% 30%);
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--neon-green);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Header & Filters --- */
+        header {
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .type-btn {
+            background: var(--dark-green);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            cursor: pointer;
+            clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
+            transition: all 0.3s ease;
+        }
+
+        .type-btn:hover {
+            background: var(--neon-green);
+            color: var(--bg-black);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* --- Main Grid --- */
+        .dex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pkmn-card {
+            background: #111;
+            border: 1px solid var(--dark-green);
+            padding: 15px;
+            position: relative;
+            clip-path: var(--sharp-edge);
+            transition: transform 0.2s;
+        }
+
+        .pkmn-card:hover {
+            border-color: var(--neon-green);
+            transform: scale(1.05);
+        }
+
+        .pkmn-card img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(0.5) sepia(0.2) hue-rotate(80deg); /* Optional: cyber-thematic filter */
+            border-bottom: 1px solid var(--dark-green);
+            margin-bottom: 10px;
+        }
+
+        .pkmn-info {
+            text-align: right;
+        }
+
+        .pkmn-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .pkmn-type {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            color: #fff;
+        }
+
+        /* --- Scanline Effect --- */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="filter-container">
+        <!-- Sample of types as buttons -->
+        <button class="type-btn">Normal</button>
+        <button class="type-btn">Fire</button>
+        <button class="type-btn">Water</button>
+        <button class="type-btn">Electric</button>
+        <button class="type-btn">Grass</button>
+        <button class="type-btn">Ice</button>
+        <button class="type-btn">Fighting</button>
+        <button class="type-btn">Poison</button>
+        <button class="type-btn">Ground</button>
+        <button class="type-btn">Psychic</button>
+        <button class="type-btn">Steel</button>
+    </div>
+</header>
+
+<main class="dex-grid">
+<!-- JavaScript will inject cards here -->
+    
+</main>
+<script>
+async function loadPokedex() {
+    const container = document.getElementById('pokedex-container');
+    
+    try {
+        // 1. Fetch the JSON file
+        const response = await fetch('pokedex.json');
+        const data = await response.json();
+
+        // 2. Loop through every key (slug) in your JSON
+        Object.keys(data).forEach(slug => {
+            const pokemon = data[slug];
+
+            // 3. Create the "Card" HTML string
+            const cardHTML = `
+                <div class="pkmn-card" onclick="location.href='detail.html?id=${slug}'">
+                    <img src="${pokemon.image}" alt="${pokemon.name}">
+                    <div class="pkmn-info">
+                        <span class="pkmn-name">${pokemon.name}</span>
+                        <span class="pkmn-type">${pokemon.types.join(' / ')}</span>
+                    </div>
+                </div>
+            `;
+
+            // 4. Drop it into the container
+            container.innerHTML += cardHTML;
+        });
+    } catch (error) {
+        console.error("Error loading the Dex:", error);
+        container.innerHTML = "<p>TERMINAL ERROR: DATA CORRUPT</p>";
+    }
+}
+
+// Initialize on load
+loadPokedex();
+</script>
+
+</body>
+</html>

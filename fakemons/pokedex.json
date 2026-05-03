@@ -1,0 +1,18 @@
+{
+    "cuboo": {
+      "name": "Cuboo",
+      "types": ["Grass"],
+      "description": "Ale panda jo pidi.",
+      "image": "fakemons/cuboo.webp",
+      "prev_evo": null,
+      "next_evo": "ninda"
+    },
+    "Ninda": {
+      "name": "Ninda",
+      "types": ["Grass", "Fighting"],
+      "description": "TA PANDA TO NINJA.",
+      "image": "fakemons/Ninda.webp",
+      "prev_evo": "Cuboo",
+      "next_evo": null
+    }
+  }
