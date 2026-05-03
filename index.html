@@ -137,40 +137,57 @@
     
 </main>
 <script>
+// This "DOMContentLoaded" line fixes the 'properties of null' error
+document.addEventListener('DOMContentLoaded', () => {
+    loadPokedex();
+});
+
 async function loadPokedex() {
     const container = document.getElementById('pokedex-container');
     
-    try {
-        // 1. Fetch the JSON file
-        const response = await fetch('fakemons/pokedex.json');
-        const data = await response.json();
+    // Safety check: if container doesn't exist yet, stop
+    if (!container) return;
 
-        // 2. Loop through every key (slug) in your JSON
+    try {
+        // We use './' to tell Netlify to look in the same folder
+        const response = await fetch('./pokedex.json');
+        
+        if (!response.ok) {
+            throw new Error(`File not found (Status: ${response.status})`);
+        }
+
+        const data = await response.json();
+        container.innerHTML = ""; // Clear loading message
+
         Object.keys(data).forEach(slug => {
             const pokemon = data[slug];
+            const card = document.createElement('div');
+            card.className = 'pkmn-card';
+            
+            card.onclick = () => {
+                window.location.href = `detail.html?id=${slug}`;
+            };
 
-            // 3. Create the "Card" HTML string
-            const cardHTML = `
-                <div class="pkmn-card" onclick="location.href='detail.html?id=${slug}'">
-                    <img src="${pokemon.image}" alt="${pokemon.name}">
-                    <div class="pkmn-info">
-                        <span class="pkmn-name">${pokemon.name}</span>
-                        <span class="pkmn-type">${pokemon.types.join(' / ')}</span>
-                    </div>
+            card.innerHTML = `
+                <img src="${pokemon.image}" alt="${pokemon.name}" onerror="this.src='https://via.placeholder.com/200?text=IMAGE+NOT+FOUND'">
+                <div class="pkmn-info">
+                    <span class="pkmn-name">${pokemon.name}</span>
+                    <span class="pkmn-type">${pokemon.types.join(' / ')}</span>
                 </div>
             `;
-
-            // 4. Drop it into the container
-            container.innerHTML += cardHTML;
+            container.appendChild(card);
         });
+
     } catch (error) {
-        console.error("Error loading the Dex:", error);
-        container.innerHTML = "<p>TERMINAL ERROR: DATA CORRUPT</p>";
+        console.error("Critical Error:", error);
+        container.innerHTML = `
+            <div style="color: #39ff14; border: 1px solid red; padding: 20px; text-align: center;">
+                <h2 style="color: red;">TERMINAL ERROR</h2>
+                <p>FILE: pokedex.json NOT FOUND OR CORRUPT</p>
+                <p style="font-size: 0.8rem;">DETAILS: ${error.message}</p>
+            </div>`;
     }
 }
-
-// Initialize on load
-loadPokedex();
 </script>
 
 </body>
