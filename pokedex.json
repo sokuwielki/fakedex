@@ -25,7 +25,7 @@
     "evo_line": ["flambit","mufflhare","jugglhare"],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
-  }
+  },
   "mufflhare": {
     "name": "Mufflhare",
     "types": ["Fire", "Fairy"],
@@ -34,7 +34,7 @@
     "evo_line": ["flambit","mufflhare","jugglhare"],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
-  }
+  },
   "jugglhare": {
     "name": "Jugglhare",
     "types": ["Fire", "Fairy"],
