@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEX_GEN // ADMIN TERMINAL</title>
+    <style>
+        :root {
+            --bg-black: #0a0a0a;
+            --neon-green: #39ff14;
+            --dark-green: #052e05;
+            --sharp-edge: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--neon-green);
+            font-family: 'Courier New', Courier, monospace;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* --- Left Side: The Form --- */
+        .form-sector {
+            padding: 40px;
+            border-right: 2px solid var(--neon-green);
+            overflow-y: auto;
+        }
+
+        h2 { border-bottom: 2px solid var(--neon-green); padding-bottom: 10px; }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.8rem; }
+        
+        input, textarea {
+            background: #111;
+            border: 1px solid var(--dark-green);
+            color: var(--neon-green);
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--neon-green); box-shadow: 0 0 5px var(--neon-green); }
+
+        button {
+            background: var(--dark-green);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 15px;
+            width: 100%;
+            cursor: pointer;
+            clip-path: var(--sharp-edge);
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        button:hover { background: var(--neon-green); color: black; }
+
+        /* --- Right Side: Preview & Output --- */
+        .preview-sector {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(57, 255, 20, 0.02);
+        }
+
+        #json-output {
+            background: #000;
+            border: 1px solid var(--dark-green);
+            padding: 15px;
+            white-space: pre-wrap;
+            font-size: 0.8rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            color: #888;
+        }
+
+        .copy-banner {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #fff;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-sector">
+    <h2>> DATA_INPUT_MODULE</h2>
+    <div class="input-group">
+        <label>UNIQUE SLUG (e.g. cuboo)</label>
+        <input type="text" id="slug" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+        <label>SPECIES NAME</label>
+        <input type="text" id="name" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+        <label>TYPES (COMMA SEPARATED)</label>
+        <input type="text" id="types" placeholder="Grass, Fighting" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+        <label>IMAGE FILENAME (LOCAL PATH)</label>
+        <input type="text" id="img" placeholder="fakemons/image.webp" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+        <label>DESCRIPTION</label>
+        <textarea id="desc" rows="3" oninput="updatePreview()"></textarea>
+    </div>
+    <div class="input-group">
+        <label>STATS (HP, ATK, DEF, SP.ATK, SP.DEF, SPD)</label>
+        <input type="text" id="stats" placeholder="10, 5, 10, 8, 8, 12" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+        <label>MOVES (COMMA SEPARATED)</label>
+        <input type="text" id="moves" placeholder="Tackle, Growl" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+        <label>EVOLUTION LINE SLUGS (COMMA SEPARATED)</label>
+        <input type="text" id="evo" placeholder="cuboo, ninda" oninput="updatePreview()">
+    </div>
+</div>
+
+<div class="preview-sector">
+    <h2>> JSON_GENERATED_OUTPUT</h2>
+    <div id="json-output">// STANDBY: AWAITING INPUT...</div>
+    <button onclick="copyToClipboard()">COPY JSON TO CLIPBOARD</button>
+    <div class="copy-banner" id="status-msg">READY FOR UPLOAD</div>
+</div>
+
+<script>
+    function updatePreview() {
+        const slug = document.getElementById('slug').value || "id_null";
+        
+        const data = {
+            name: document.getElementById('name').value || "Unknown Species",
+            types: document.getElementById('types').value.split(',').map(s => s.trim()).filter(s => s !== ""),
+            description: document.getElementById('desc').value || "No data.",
+            image: document.getElementById('img').value.toLowerCase() || "fakemons/placeholder.webp",
+            evo_line: document.getElementById('evo').value.split(',').map(s => s.trim()).filter(s => s !== ""),
+            stats: document.getElementById('stats').value.split(',').map(s => parseInt(s.trim()) || 0),
+            moves: document.getElementById('moves').value.split(',').map(s => s.trim()).filter(s => s !== "")
+        };
+
+        const outputString = `"${slug}": ${JSON.stringify(data, null, 4)},`;
+        document.getElementById('json-output').innerText = outputString;
+    }
+
+    function copyToClipboard() {
+        const text = document.getElementById('json-output').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const status = document.getElementById('status-msg');
+            status.innerText = "COPIED TO CLIPBOARD!";
+            status.style.color = "#39ff14";
+            setTimeout(() => {
+                status.innerText = "READY FOR UPLOAD";
+                status.style.color = "#fff";
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
