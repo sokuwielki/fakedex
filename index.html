@@ -150,7 +150,7 @@ async function loadPokedex() {
 
     try {
         // We use './' to tell Netlify to look in the same folder
-        const response = await fetch('fakemons/pokedex.json');
+        const response = await fetch('./pokedex.json');
         
         if (!response.ok) {
             throw new Error(`File not found (Status: ${response.status})`);
