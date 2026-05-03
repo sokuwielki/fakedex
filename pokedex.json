@@ -6,7 +6,7 @@
       "image": "fakemons/cuboo.webp",
       "evo_line": ["cuboo", "ninda"]
     },
-    "Ninda": {
+    "ninda": {
       "name": "Ninda",
       "types": ["Grass", "Fighting"],
       "description": "TA PANDA TO NINJA.",
