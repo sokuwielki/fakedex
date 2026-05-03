@@ -187,15 +187,16 @@ async function loadPokedex() {
 // THE FILTER FUNCTION
 function filterType(type) {
     const cards = document.querySelectorAll('.pkmn-card');
-    
+    const targetType = type.toLowerCase(); // Convert filter to lowercase
+
     cards.forEach(card => {
-        const pokemonTypes = card.getAttribute('data-types').split(',');
+        // Convert the card's stored types to lowercase too
+        const pokemonTypes = card.getAttribute('data-types').toLowerCase().split(',');
         
-        if (type === 'all' || pokemonTypes.includes(type)) {
-            card.style.display = 'block'; // Show
-            card.style.opacity = '1';
+        if (type === 'all' || pokemonTypes.includes(targetType)) {
+            card.style.display = 'block';
         } else {
-            card.style.display = 'none'; // Hide
+            card.style.display = 'none';
         }
     });
 }
