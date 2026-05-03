@@ -145,12 +145,12 @@
         const imgInput = document.getElementById('img');
         
         if (!nameValue) {
-            imgInput.placeholder = "fakemons/name.webp";
+            imgInput.placeholder = "fakemons/name.png";
             return;
         }
     
         const cleanName = nameValue.toLowerCase().replace(/\s+/g, '-');
-        imgInput.placeholder = `fakemons/${cleanName}.webp`;
+        imgInput.placeholder = `fakemons/${cleanName}.png`;
     }
     
     function updatePreview() {
@@ -167,7 +167,7 @@
             types: document.getElementById('types').value.split(',').map(s => s.trim()).filter(s => s !== ""),
             description: document.getElementById('desc').value || "No data.",
             // SMART LOGIC: Use manual path if typed, otherwise use the clean name
-            image: imgValue ? imgValue.toLowerCase() : `fakemons/${cleanName || 'placeholder'}.webp`,
+            image: imgValue ? imgValue.toLowerCase() : `fakemons/${cleanName || 'placeholder'}.png`,
             evo_line: document.getElementById('evo').value.split(',').map(s => s.trim()).filter(s => s !== ""),
             stats: document.getElementById('stats').value.split(',').map(s => parseInt(s.trim()) || 0),
             moves: document.getElementById('moves').value.split(',').map(s => s.trim()).filter(s => s !== "")
