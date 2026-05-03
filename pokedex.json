@@ -22,7 +22,25 @@
     "types": ["Fire"],
     "description": "TA PANDA TO NINJA.",
     "image": "fakemons/Flambit.png",
-    "evo_line": [],
+    "evo_line": ["flambit","mufflhare","jugglhare"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  }
+  "mufflhare": {
+    "name": "Mufflhare",
+    "types": ["Fire"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Mufflehare.png",
+    "evo_line": ["flambit","mufflhare","jugglhare"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  }
+  "jugglhare": {
+    "name": "Jugglhare",
+    "types": ["Fire"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Jugglhare.png",
+    "evo_line": ["flambit","mufflhare","jugglhare"],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
   }
