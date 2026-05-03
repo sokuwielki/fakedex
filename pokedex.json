@@ -30,7 +30,7 @@
     "name": "Mufflhare",
     "types": ["Fire", "Fairy"],
     "description": "TA PANDA TO NINJA.",
-    "image": "fakemons/Mufflehare.png",
+    "image": "fakemons/Mufflhare.png",
     "evo_line": ["flambit","mufflhare","jugglhare"],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
