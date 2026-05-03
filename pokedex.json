@@ -70,5 +70,32 @@
     "evo_line": ["leeve","muroom","shamurell"],
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  },
+  "platypus": {
+    "name": "Platypus",
+    "types": ["Water"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Platypus.png",
+    "evo_line": ["platypus","platyquill","swimperor"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  },
+  "platyquill": {
+    "name": "Platyquill",
+    "types": ["Water", "Poison"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Platyquill.png",
+    "evo_line": ["platypus","platyquill","swimperor"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  },
+  "swimperor": {
+    "name": "Swimperor",
+    "types": ["Water", "Poison"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/Swimperor.png",
+    "evo_line": ["platypus","platyquill","swimperor"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
   }
 }
