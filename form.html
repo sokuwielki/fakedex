@@ -99,7 +99,7 @@
     </div>
     <div class="input-group">
         <label>SPECIES NAME</label>
-        <input type="text" id="name" oninput="updatePreview()">
+        <input type="text" id="name" oninput="updatePreview(); updateImagePath()">
     </div>
     <div class="input-group">
         <label>TYPES (COMMA SEPARATED)</label>
@@ -107,7 +107,7 @@
     </div>
     <div class="input-group">
         <label>IMAGE FILENAME (LOCAL PATH)</label>
-        <input type="text" id="img" placeholder="fakemons/image.webp" oninput="updatePreview()">
+        <input type="text" id="img" placeholder="fakemons/name.png" oninput="updatePreview()">
     </div>
     <div class="input-group">
         <label>DESCRIPTION</label>
@@ -164,6 +164,17 @@
             }, 2000);
         });
     }
+function updatePreview {
+    const nameValue = document.getElementById('name').value.toLowerCase().replace(/\s+/g, '-');
+    const imgValue = document.getElementById('img').value;
+    
+    const data = {
+        name: document.getElementById('name').value || "Unknown Species",
+        // IF the user typed an image path, use it. 
+        // IF NOT, use the auto-generated one based on the name.
+        image: imgValue ? imgValue.toLowerCase() : `fakemons/${nameValue || 'placeholder'}.webp`,
+    }
+};
 </script>
 
 </body>
