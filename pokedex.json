@@ -28,7 +28,7 @@
   }
   "mufflhare": {
     "name": "Mufflhare",
-    "types": ["Fire"],
+    "types": ["Fire", "Fairy"],
     "description": "TA PANDA TO NINJA.",
     "image": "fakemons/Mufflehare.png",
     "evo_line": ["flambit","mufflhare","jugglhare"],
@@ -37,7 +37,7 @@
   }
   "jugglhare": {
     "name": "Jugglhare",
-    "types": ["Fire"],
+    "types": ["Fire", "Fairy"],
     "description": "TA PANDA TO NINJA.",
     "image": "fakemons/Jugglhare.png",
     "evo_line": ["flambit","mufflhare","jugglhare"],
