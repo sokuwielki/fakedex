@@ -1,22 +1,4 @@
 {
-  "cuboo": {
-    "name": "Cuboo",
-    "types": ["Grass"],
-    "description": "Ale panda jo pidi.",
-    "image": "fakemons/cuboo.webp",
-    "evo_line": ["cuboo", "ninda"],
-    "stats": [1, 2, 3, 4, 5, 6],
-    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
-  },
-  "ninda": {
-    "name": "Ninda",
-    "types": ["Grass", "Fighting"],
-    "description": "TA PANDA TO NINJA.",
-    "image": "fakemons/ninda.webp",
-    "evo_line": ["cuboo", "ninda"],
-    "stats": [7, 2, 7, 4, 5, 6],
-    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
-  },
    "flambit": {
     "name": "Flambit",
     "types": ["Fire"],
