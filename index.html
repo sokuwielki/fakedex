@@ -142,7 +142,7 @@ async function loadPokedex() {
     
     try {
         // 1. Fetch the JSON file
-        const response = await fetch('fakemons\pokedex.json');
+        const response = await fetch('fakemons/pokedex.json');
         const data = await response.json();
 
         // 2. Loop through every key (slug) in your JSON
