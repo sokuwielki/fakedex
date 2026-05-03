@@ -17,4 +17,13 @@
     "stats": [7, 2, 7, 4, 5, 6],
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
   }
+   "flambit": {
+    "name": "Ninda",
+    "types": ["Grass", "Fighting"],
+    "description": "TA PANDA TO NINJA.",
+    "image": "fakemons/flambit.png",
+    "evo_line": ["cuboo", "ninda"],
+    "stats": [7, 2, 7, 4, 5, 6],
+    "moves": ["Earthquake", "Grass Whistle", "Explosion"]
+  }
 }
