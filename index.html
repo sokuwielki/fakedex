@@ -116,8 +116,8 @@
 <body>
 
 <header>
-    <div class="filter-container">
-        <!-- Sample of types as buttons -->
+    <div class="filter-container" id="type-filters">
+        <button class="type-btn" onclick="filterType('all')">All</button>
         <button class="type-btn">Normal</button>
         <button class="type-btn">Fire</button>
         <button class="type-btn">Water</button>
@@ -145,56 +145,59 @@
     
 </main>
 <script>
-// This "DOMContentLoaded" line fixes the 'properties of null' error
 document.addEventListener('DOMContentLoaded', () => {
     loadPokedex();
 });
 
 async function loadPokedex() {
     const container = document.getElementById('pokedex-container');
-    
-    // Safety check: if container doesn't exist yet, stop
     if (!container) return;
 
     try {
-        // We use './' to tell Netlify to look in the same folder
         const response = await fetch('./pokedex.json');
-        
-        if (!response.ok) {
-            throw new Error(`File not found (Status: ${response.status})`);
-        }
-
         const data = await response.json();
-        container.innerHTML = ""; // Clear loading message
+        container.innerHTML = ""; 
 
         Object.keys(data).forEach(slug => {
-            const pokemon = data[slug];
+            const p = data[slug];
             const card = document.createElement('div');
             card.className = 'pkmn-card';
+            
+            // KEY ADDITION: Store types as a data attribute for easy filtering
+            card.setAttribute('data-types', p.types.join(','));
             
             card.onclick = () => {
                 window.location.href = `detail.html?id=${slug}`;
             };
 
             card.innerHTML = `
-                <img src="${pokemon.image}" alt="${pokemon.name}" onerror="this.src='https://via.placeholder.com/200?text=IMAGE+NOT+FOUND'">
+                <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/200?text=IMAGE+NOT+FOUND'">
                 <div class="pkmn-info">
-                    <span class="pkmn-name">${pokemon.name}</span>
-                    <span class="pkmn-type">${pokemon.types.join(' / ')}</span>
+                    <span class="pkmn-name">${p.name}</span>
+                    <span class="pkmn-type">${p.types.join(' / ')}</span>
                 </div>
             `;
             container.appendChild(card);
         });
-
     } catch (error) {
-        console.error("Critical Error:", error);
-        container.innerHTML = `
-            <div style="color: #39ff14; border: 1px solid red; padding: 20px; text-align: center;">
-                <h2 style="color: red;">TERMINAL ERROR</h2>
-                <p>FILE: pokedex.json NOT FOUND OR CORRUPT</p>
-                <p style="font-size: 0.8rem;">DETAILS: ${error.message}</p>
-            </div>`;
+        container.innerHTML = "<h2>TERMINAL ERROR: DATABASE OFFLINE</h2>";
     }
+}
+
+// THE FILTER FUNCTION
+function filterType(type) {
+    const cards = document.querySelectorAll('.pkmn-card');
+    
+    cards.forEach(card => {
+        const pokemonTypes = card.getAttribute('data-types').split(',');
+        
+        if (type === 'all' || pokemonTypes.includes(type)) {
+            card.style.display = 'block'; // Show
+            card.style.opacity = '1';
+        } else {
+            card.style.display = 'none'; // Hide
+        }
+    });
 }
 </script>
 
