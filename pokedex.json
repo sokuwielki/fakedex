@@ -11,7 +11,7 @@
       "name": "Ninda",
       "types": ["Grass", "Fighting"],
       "description": "TA PANDA TO NINJA.",
-      "image": "fakemons/Ninda.webp",
+      "image": "fakemons/ninda.webp",
       "prev_evo": "Cuboo",
       "next_evo": null
     }
