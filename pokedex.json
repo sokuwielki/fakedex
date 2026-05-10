@@ -54,7 +54,7 @@
     "moves": ["Earthquake", "Grass Whistle", "Explosion"]
   },
   "platypus": {
-    "name": "Platypus",
+    "name": "Platypal",
     "types": ["Water"],
     "description": "TA PANDA TO NINJA.",
     "image": "fakemons/Platypus.png",
